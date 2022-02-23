@@ -1,26 +1,26 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <Gamepad/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Gamepad from "@/components/Gamepad";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Gamepad,
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+*{
+  /*moz-user-select: -moz-none;*/
+  -moz-user-select: none;
+  /*-o-user-select:none;*/
+  /*-khtml-user-select:none;*/
+  -webkit-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
 }
 </style>
