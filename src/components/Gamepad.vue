@@ -12,7 +12,7 @@ import Sprite from "@/components/Sprite";
 import Background from "@/components/Background";
 import script from "@/assets/dr-script/script";
 
-import {ref, markRaw, reactive, onMounted, onUnmounted, provide, toRefs, watch} from "vue";
+import {ref, markRaw, reactive, onMounted, onUnmounted, toRefs, watch} from "vue";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -93,18 +93,7 @@ export default {
     })
 
 
-    //暴露出全局的时间, 到时候做动画用
-    const timer = ref(0);
-    let timerId;
-    onMounted(() => {
-      timerId = setInterval(() => {
-        timer.value++;
-      }, 16);
-    })
-    onUnmounted(() => {
-      window.clearInterval(timerId);
-    })
-    provide('timer', timer);
+
 
     return {
       drScript, p: scriptP, ...toRefs(gameState),

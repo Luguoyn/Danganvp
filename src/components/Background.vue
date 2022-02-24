@@ -6,7 +6,8 @@
 </template>
 
 <script>
-import {reactive, watch, onMounted, onUnmounted, toRefs, ref} from "vue";
+import {reactive, watch, toRefs, ref} from "vue";
+import useWindows from "@/hooks/useWindows";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -21,26 +22,7 @@ export default {
     const bg = ref(null);
     const div = ref(null);
 
-    const win = reactive({
-      width: 0, height: 0
-    })
-
-    function getWindowSize() {
-      win.width = window.innerWidth;
-      win.height = window.innerHeight;
-      // win.width=div.value.width;
-      // win.height=div.value.height;
-    }
-
-    onMounted(() => {
-      window.addEventListener('resize', getWindowSize);
-      win.width=document.documentElement ? document.documentElement.clientHeight : window.innerHeight;
-      win.height=document.documentElement ? document.documentElement.clientHeight : window.innerHeight;
-    })
-
-    onUnmounted(() => {
-      window.removeEventListener('resize', getWindowSize);
-    })
+    const win = useWindows();
 
     watch([bg, win], () => {
       if (bg.value !== null && win.height !== 0 && win.width !== 0) {
