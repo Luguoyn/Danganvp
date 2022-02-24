@@ -31,7 +31,6 @@ export default {
       expression: props.expression,
     })
 
-
     const characterList = markRaw(Object.keys(characters));
 
     return {

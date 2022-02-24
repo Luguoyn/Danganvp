@@ -26,19 +26,16 @@ export default {
     })
 
     function getWindowSize() {
-      // win.width = window.innerWidth;
-      // win.height = window.innerHeight;
-      win.width=div.value.width;
-      win.height=div.value.height;
+      win.width = window.innerWidth;
+      win.height = window.innerHeight;
+      // win.width=div.value.width;
+      // win.height=div.value.height;
     }
 
     onMounted(() => {
       window.addEventListener('resize', getWindowSize);
-      getWindowSize();
-      setTimeout(() => {
-        getWindowSize();
-
-      }, 1000);
+      win.width=document.documentElement ? document.documentElement.clientHeight : window.innerHeight;
+      win.height=document.documentElement ? document.documentElement.clientHeight : window.innerHeight;
     })
 
     onUnmounted(() => {
@@ -84,7 +81,6 @@ export default {
   bottom: 0;
 }
 
-
 .dr-background-div {
   /*align-content: center;*/
   width: 100%;
@@ -100,5 +96,11 @@ export default {
 .dr-background-img {
   width: v-bind(width);
   height: v-bind(height);
+
+  position: fixed;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
 }
 </style>

@@ -93,7 +93,7 @@ export default {
     })
 
 
-    //暴露出全局的时间
+    //暴露出全局的时间, 到时候做动画用
     const timer = ref(0);
     let timerId;
     onMounted(() => {
