@@ -7,7 +7,7 @@
                 v-for="(character, index) in characterList"
                 :key="index">
       <div v-if="character===name" class="dr-sprite-div">
-        <img class="dr-sprite-img"
+        <img class="dr-sprite-img" draggable="false"
              :src="require(`../assets/img/sprite/${name}/${expression}.png`)" alt="">
       </div>
 

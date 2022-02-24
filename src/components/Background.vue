@@ -1,7 +1,7 @@
 <template>
   <div class="dr-background dr-background-div" ref="div">
     <!--  <img class="dr-background-img" src="../assets/img/background/bg000.png">-->
-    <img class="dr-background-img" ref="bg" :src="require(`../assets/img/background/${name}.png`)" alt="">
+    <img class="dr-background-img" ref="bg" :src="require(`../assets/img/background/${name}.png`)" alt=""  draggable="false">
   </div>
 </template>
 
