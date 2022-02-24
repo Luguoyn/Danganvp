@@ -1,6 +1,6 @@
 <template>
   <div @click="goNext">
-    <Background :background="drScript[p].background"></Background>
+    <Background :background="background"></Background>
     <Sprite :name="name" :expression="expression"></Sprite>
     <Dialog :name="name" :context="context"></Dialog>
   </div>
@@ -12,7 +12,7 @@ import Sprite from "@/components/Sprite";
 import Background from "@/components/Background";
 import script from "@/assets/dr-script/script";
 
-import {ref, markRaw, reactive, onMounted, onUnmounted, provide, toRefs} from "vue";
+import {ref, markRaw, reactive, onMounted, onUnmounted, provide, toRefs, watch} from "vue";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -22,41 +22,54 @@ export default {
   },
   setup() {
     const drScript = markRaw(script);
-    const p = ref(localStorage.getItem('p') || 0);
+    const scriptP = ref(localStorage.getItem('scriptP') || 0);
+    const modelP = ref(localStorage.getItem('modelP') || 0);
+    let s;
+    watch([modelP, scriptP], () => {
+      s = drScript[modelP.value].script[scriptP.value];
+    }, {immediate: true});
     const gameState = reactive({
-      name: drScript[p.value].name,
-      context: drScript[p.value].context,
-      expression: drScript[p.value].expression,
-      background: drScript[p.value].background,
+      name: s.name,
+      context: s.context,
+      expression: s.expression,
+      background: s.background,
+      style: s.style,
     })
 
     let flag = true;
     let index = 0;
     let targetContent = '';
-    let pflag = false;
+    let scriptFlag = false;
 
     function goNext() {
+      let length = drScript[modelP.value].script.length;
+      if (scriptP.value >= length) scriptP.value = 0;
       if (flag) {
-        while (p.value < drScript.length && drScript[p.value].style !== '对话') {
+        gameState.style = s.style || gameState.style;
+        while (gameState.style !== 'dialog') {
+          scriptP.value++;
+          if (scriptP.value >= length) scriptP.value = 0;
+          gameState.style = s.style || gameState.style;
           //先暂时跳过不是对话的属性
-          p.value++;
         }
-        if (p.value === drScript.length) p.value = 0;
 
 
-        gameState.name = drScript[p.value].name;
-        gameState.expression = drScript[p.value].expression;
-        gameState.background = drScript[p.value].background;
+        gameState.name = s.name || gameState.name;
+        gameState.expression = s.expression || gameState.expression;
+        gameState.background = s.background || gameState.background;
 
-        index = 0;
-        flag = false;
-        pflag = true;
-        targetContent = drScript[p.value].context;
+        if (s.context) {
+          index = 0;
+          flag = false;
+          scriptFlag = true;
+          targetContent = s.context;
+        }
+
       } else {
-        if (p.value >= drScript.length) {
-          p.value = 0;
+        if (scriptP.value >= length) {
+          scriptP.value = 0;
         } else {
-          index = drScript[p.value].context.length;
+          index = s.context.length;
         }
       }
     }
@@ -64,13 +77,13 @@ export default {
     let printerId;
     onMounted(() => {
       printerId = setInterval(() => {
-        flag = index > targetContent.length;
-        if (!flag) {
+        if (index <= targetContent.length) {
           gameState.context = targetContent.slice(0, index++);
         } else {
-          if (pflag) {
-            p.value++;
-            pflag = false;
+          if (scriptFlag) {
+            flag = true;
+            scriptP.value++;
+            scriptFlag = false;
           }
         }
       }, 50);
@@ -94,7 +107,7 @@ export default {
     provide('timer', timer);
 
     return {
-      drScript, p, ...toRefs(gameState),
+      drScript, p: scriptP, ...toRefs(gameState),
       goNext,
     }
   }

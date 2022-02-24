@@ -6,13 +6,14 @@
     </div>
 
     <div class="dr-dialog-name">
-      <span class="dr-dialog-name-text">{{ name }}</span>
+      <span class="dr-dialog-name-text">{{ localizedName }}</span>
     </div>
   </div>
 </template>
 
 <script>
-import {toRefs, reactive} from 'vue'
+import {toRefs, reactive, computed} from 'vue'
+import characters from "@/assets/dr-script/characters";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -22,10 +23,15 @@ export default {
     const dialog = reactive({
       name: props.name,
       context: props.context,
-    })
+    });
+
+    const localizedName = computed(()=>{
+      return characters[props.name];
+    });
+
     return {
-      ...toRefs(dialog),
-    }
+      ...toRefs(dialog), localizedName
+    };
   }
 
 }

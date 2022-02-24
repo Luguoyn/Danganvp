@@ -32,7 +32,7 @@ export default {
     })
 
 
-    const characterList = markRaw(characters);
+    const characterList = markRaw(Object.keys(characters));
 
     return {
       ...toRefs(character),
