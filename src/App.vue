@@ -32,9 +32,4 @@ export default {
   font-family: qing-yuan;
   src: url("assets/font/qing-yuan.ttc");
 }
-
-@font-face {
-  font-family: dr-font;
-  src: url("assets/font/dr-font.otf");
-}
 </style>

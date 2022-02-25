@@ -40,6 +40,10 @@
       ></av-bars>
     </div>
 
+    <div class="dr-bgm-name">
+      <marquee class="dr-bgm-name-loop" behavior="scroll" direction="left">{{ backgroundMusic }}</marquee>
+    </div>
+
     <img class="dr-bgm-guitar" ref="bgmGuitar" :src="require(`../assets/img/ui/daytime/guitar01.png`)" alt=""
          draggable="false">
 
@@ -92,8 +96,8 @@ export default {
     });
 
     const bgmL = computed(() => {
-      let left = bgmGuitar.value.width / 2 || 94 / 262 * win.height * 0.32 / 2;
-      return left + 'px';
+      let left = bgmGuitar.value.width || 94 / 262 * win.height * 0.32;
+      return left / 2 + 'px';
     });
 
     const localizedName = computed(() => {
@@ -174,17 +178,19 @@ export default {
 .dr-name-context {
   position: fixed;
   bottom: 18vh;
-  left: 2.2vw;
+  left:3vw;
   text-align: center;
 
   transform-origin: left;
+  /*transform-origin: 0% 100%;*/
   transform: rotate(-90deg);
   -ms-transform: rotate(-90deg); /* IE 9 */
   -moz-transform: rotate(-90deg); /* Firefox */
   -webkit-transform: rotate(-90deg); /* Safari 和 Chrome */
   -o-transform: rotate(-90deg); /* Opera */
 
-  font-size: min(6vh, 4vw);
+  /*font-size: min(6vh, 4vw);*/
+  font-size: 6vh;
 }
 
 .dr-bgm {
@@ -228,5 +234,17 @@ export default {
 .dr-bgm-bars-scale-control {
   transform-origin: 0 100%;
   transform: scale(v-bind(bgmS), v-bind(bgmS));
+}
+
+.dr-bgm-name{
+  position: fixed;
+  left: v-bind(bgmL);
+  top: 1.5vh;
+  width: 17vh;
+}
+
+.dr-bgm-name-loop{
+  font-size: 3vh;
+  color: brown;
 }
 </style>
