@@ -2,28 +2,45 @@
 
 
   <div class="dr-dialog">
-    <img class="dr-dialog-bar" ref="dialogBar" :src="require(`../assets/img/ui/public/dialog-bar.png`)" alt="">
+    <img class="dr-dialog-bar" ref="dialogBar" :src="require(`../assets/img/ui/public/dialog-bar.png`)" alt=""
+         draggable="false">
     <div class="dr-dialog-context">
       <span>{{ context }}</span>
     </div>
   </div>
 
   <div class="dr-name">
-    <img class="dr-name-bar" ref="nameBar" :src="require(`../assets/img/ui/daytime/namebar-main-character.png`)" alt="">
+    <img class="dr-name-bar" ref="nameBar" :src="require(`../assets/img/ui/daytime/namebar-main-character.png`)" alt=""
+         draggable="false">
     <div class="dr-name-bubble" v-for="index of [0,1,2,3]" :key="index">
-      <img class="dr-name-bubble-img" v-show="(bubbleTimer)%4===index" :src="require(`../assets/img/ui/public/bubble${index+1}.png`)" alt="">
+      <img class="dr-name-bubble-img" v-show="bubbleController===index"
+           :src="require(`../assets/img/ui/public/bubble${index+1}.png`)" alt="" draggable="false">
     </div>
     <div class="dr-name-context">
       <span class="dr-dialog-name-text">{{ localizedName }}</span>
     </div>
   </div>
+
+  <div class="dr-bgm">
+    <img class="dr-bgm-bar" ref="bgmBar" :src="require(`../assets/img/ui/daytime/audio-bar.png`)" alt=""
+         draggable="false">
+
+    <audio ref="bgm" :src="require(`../assets/audio/bgm/beautiful days.mp3`)" autoplay></audio>
+<!--    <av-bars-->
+<!--        class="dr-bgm-bars"-->
+<!--        ref-link="bgm"-->
+<!--        :canv-width="100"-->
+<!--        :bar-width="12"-->
+<!--        :bar-space="5"-->
+<!--        bar-color="#222"-->
+<!--    />-->
+  </div>
 </template>
 
 <script>
-import {toRefs, reactive, computed, ref} from 'vue'
+import {toRefs, reactive, computed, ref, inject} from 'vue'
 import characters from "@/assets/dr-script/characters";
 import useWindows from "@/hooks/useWindows";
-import {onMounted, onUnmounted} from "vue";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -33,13 +50,14 @@ export default {
     const dialog = reactive({
       name: props.name,
       context: props.context,
-
+      backgroundMusic: 'beautiful days'
     });
 
     const win = useWindows();
 
     const nameBar = ref(null);
     const dialogBar = ref(null);
+    const bgmBar = ref(null);
 
     const dialogH = computed(() => {
       let height = dialogBar.value.height / dialogBar.value.width * win.width * 0.8 || 305 / 1920 * win.width * 0.8
@@ -47,11 +65,20 @@ export default {
     });
 
     const dialogL = computed(() => {
-      return nameBar.value.width / nameBar.value.height * win.height + 'px';
+      let left = nameBar.value.width / nameBar.value.height * win.height || 180 / 1080 * win.height;
+      return left + 'px';
+    });
+
+    const bgmL = computed(() => {
+      let left = bgmBar.value.width / bgmBar.value.height * win.height || 333 / 346 * win.height;
+      console.log(left);
+      return left * 0.3 + 'px';
     })
 
     const bubbleL = computed(() => {
-      return nameBar.value.width / nameBar.value.height * win.height * 0.27 + 'px';
+      let left = nameBar.value.width / nameBar.value.height * win.height || 180 / 1080 * win.height;
+
+      return left * 0.27 + 'px';
     })
 
     const localizedName = computed(() => {
@@ -59,22 +86,16 @@ export default {
     });
 
 
-    const bubbleTimer = ref(0);
-    let bubbleTimerId;
-    onMounted(() => {
-      bubbleTimerId = setInterval(() => {
-        bubbleTimer.value++;
-      }, 500);
-    })
-    onUnmounted(() => {
-      window.clearInterval(bubbleTimerId);
+    const timer = inject('timer')
+    const bubbleController = computed(() => {
+      return Math.floor(timer.value / 40) % 4;
     })
 
     return {
       ...toRefs(dialog), localizedName,
-      nameBar, dialogBar,
-      dialogH, dialogL, bubbleL,
-      bubbleTimer
+      nameBar, dialogBar, bgmBar,
+      dialogH, dialogL, bubbleL, bgmL,
+      bubbleController
     };
   }
 
@@ -127,7 +148,7 @@ export default {
   left: v-bind(bubbleL);
 }
 
-.dr-name-bubble-img{
+.dr-name-bubble-img {
   position: fixed;
   width: 10vh;
   height: auto;
@@ -147,5 +168,31 @@ export default {
   -o-transform: rotate(-90deg); /* Opera */
 
   font-size: min(6vh, 4vw);
+}
+
+.dr-bgm {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.dr-bgm-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: 30vh;
+}
+
+.dr-bgm-bars {
+  position: fixed;
+  left: v-bind(bgmL);
+  top:0;
+  transform-origin: left;
+  transform: rotate(90deg);
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -moz-transform: rotate(90deg); /* Firefox */
+  -webkit-transform: rotate(90deg); /* Safari 和 Chrome */
+  -o-transform: rotate(90deg); /* Opera */
 }
 </style>

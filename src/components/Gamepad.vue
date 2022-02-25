@@ -12,7 +12,7 @@ import Sprite from "@/components/Sprite";
 import Background from "@/components/Background";
 import script from "@/assets/dr-script/script";
 
-import {ref, markRaw, reactive, onMounted, onUnmounted, toRefs, watch} from "vue";
+import {ref, markRaw, reactive, onMounted, onUnmounted, toRefs, watch, provide} from "vue";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -93,6 +93,17 @@ export default {
     })
 
 
+    const timer = ref(0);
+    let timerId;
+    onMounted(() => {
+      timerId = setInterval(() => {
+        timer.value++;
+      }, 16);
+    })
+    onUnmounted(() => {
+      window.clearInterval(timerId);
+    })
+    provide('timer', timer);
 
 
     return {

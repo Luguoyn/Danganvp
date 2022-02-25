@@ -1,4 +1,10 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
 
-createApp(App).mount('#app')
+import AudioVisual from 'vue-audio-visual'
+
+const app = createApp(App);
+app.mount('#app');
+
+// 使用音频可视化组件
+app.use(AudioVisual);

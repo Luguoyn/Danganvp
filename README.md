@@ -8,6 +8,12 @@
 ## todos:
 - 将UI更换为弹丸论破风格
 
+## 使用的组件/库
+
+[vue-audio-visual](https://github.com/staskobzar/vue-audio-visual)
+
+[animate.css](https://github.com/animate-css/animate.css)
+
 ## 已解决bugs:
 
 ### 部分情况下, 在进入/刷新页面时, background组件无法实现自动响应式缩放
