@@ -10,6 +10,10 @@
   "dependencies": {
     "animate.css": "^4.1.1",
     "core-js": "^3.8.3",
+    "node-sass": "^7.0.1",
+    "sass": "^1.49.9",
+    "sass-loader": "^12.6.0",
+    "scss": "^0.2.4",
     "vue": "^3.2.13",
     "vue-audio-visual": "^2.4.1"
   },

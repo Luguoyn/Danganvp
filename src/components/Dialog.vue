@@ -22,18 +22,28 @@
   </div>
 
   <div class="dr-bgm">
+
     <img class="dr-bgm-bar" ref="bgmBar" :src="require(`../assets/img/ui/daytime/audio-bar.png`)" alt=""
          draggable="false">
 
-    <audio ref="bgm" :src="require(`../assets/audio/bgm/beautiful days.mp3`)" autoplay></audio>
-<!--    <av-bars-->
-<!--        class="dr-bgm-bars"-->
-<!--        ref-link="bgm"-->
-<!--        :canv-width="100"-->
-<!--        :bar-width="12"-->
-<!--        :bar-space="5"-->
-<!--        bar-color="#222"-->
-<!--    />-->
+
+    <audio ref="bgm" :src="require(`../assets/audio/bgm/beautiful days.mp3`)" autoplay hidden></audio>
+    <div class="dr-bgm-bars">
+      <av-bars
+          class=" dr-bgm-bars-scale-control"
+          ref-link="bgm"
+          :canv-width="100"
+          :bar-width="10"
+          :bar-space="7"
+          :bar-color="`#343434`"
+          :fft-size="2**9"
+      ></av-bars>
+    </div>
+
+    <img class="dr-bgm-guitar" ref="bgmGuitar" :src="require(`../assets/img/ui/daytime/guitar01.png`)" alt=""
+         draggable="false">
+
+
   </div>
 </template>
 
@@ -41,6 +51,7 @@
 import {toRefs, reactive, computed, ref, inject} from 'vue'
 import characters from "@/assets/dr-script/characters";
 import useWindows from "@/hooks/useWindows";
+import AvBars from "vue-audio-visual/src/components/AvBars";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -58,6 +69,7 @@ export default {
     const nameBar = ref(null);
     const dialogBar = ref(null);
     const bgmBar = ref(null);
+    const bgmGuitar = ref(null);
 
     const dialogH = computed(() => {
       let height = dialogBar.value.height / dialogBar.value.width * win.width * 0.8 || 305 / 1920 * win.width * 0.8
@@ -69,17 +81,20 @@ export default {
       return left + 'px';
     });
 
-    const bgmL = computed(() => {
-      let left = bgmBar.value.width / bgmBar.value.height * win.height || 333 / 346 * win.height;
-      console.log(left);
-      return left * 0.3 + 'px';
-    })
-
     const bubbleL = computed(() => {
       let left = nameBar.value.width / nameBar.value.height * win.height || 180 / 1080 * win.height;
-
       return left * 0.27 + 'px';
-    })
+    });
+
+    const bgmS = computed(() => {
+      let left = bgmBar.value.width / bgmBar.value.height * win.height || 333 / 346 * win.height;
+      return 100 * left / 333 / 3 + '%';
+    });
+
+    const bgmL = computed(() => {
+      let left = bgmGuitar.value.width / 2 || 94 / 262 * win.height * 0.32 / 2;
+      return left + 'px';
+    });
 
     const localizedName = computed(() => {
       return characters[props.name];
@@ -93,12 +108,14 @@ export default {
 
     return {
       ...toRefs(dialog), localizedName,
-      nameBar, dialogBar, bgmBar,
-      dialogH, dialogL, bubbleL, bgmL,
+      nameBar, dialogBar, bgmBar, bgmGuitar,
+      dialogH, dialogL, bubbleL, bgmS, bgmL,
       bubbleController
     };
+  },
+  components: {
+    AvBars,
   }
-
 }
 </script>
 
@@ -184,15 +201,32 @@ export default {
   height: 30vh;
 }
 
-.dr-bgm-bars {
+.dr-bgm-guitar {
   position: fixed;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: 32vh;
+}
+
+.dr-bgm-bars {
+  position: absolute;
+
+  /*left: v-bind(bgmL);*/
+  top: 8vh;
+  /*left: 2vw;*/
   left: v-bind(bgmL);
-  top:0;
-  transform-origin: left;
+  /*transform-origin: left;*/
   transform: rotate(90deg);
   -ms-transform: rotate(90deg); /* IE 9 */
   -moz-transform: rotate(90deg); /* Firefox */
   -webkit-transform: rotate(90deg); /* Safari 和 Chrome */
   -o-transform: rotate(90deg); /* Opera */
+
+}
+
+.dr-bgm-bars-scale-control {
+  transform-origin: 0 100%;
+  transform: scale(v-bind(bgmS), v-bind(bgmS));
 }
 </style>

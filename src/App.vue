@@ -4,7 +4,6 @@
 
 <script>
 import Gamepad from "@/components/Gamepad";
-
 export default {
   name: 'App',
   components: {
