@@ -98,7 +98,7 @@ export default {
     onMounted(() => {
       timerId = setInterval(() => {
         timer.value++;
-      }, 16);
+      }, 1);
     })
     onUnmounted(() => {
       window.clearInterval(timerId);

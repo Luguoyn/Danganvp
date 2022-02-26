@@ -47,7 +47,7 @@ export default {
     }, {immediate: true})
 
     return {
-      ...toRefs(img), bg, div
+      ...toRefs(img), bg, div,
     }
   }
 
