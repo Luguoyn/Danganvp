@@ -175,11 +175,12 @@ export default {
   position: fixed;
   bottom: 0;
   left: v-bind(dialogL);
-  width: 100vw;
+  width: 80vw;
   height: v-bind(dialogH);
   color: aliceblue;
 
-  font-size: min(5vh, 4vw);
+  font-size: min(7vh, 4vw);
+  line-height: min(9vh, 5.14vw)
 }
 
 
