@@ -6,7 +6,6 @@
 - 使用了animate.css动画库
 
 ## todos:
-- 增加UI动画
 - 提高脚本能力
 - 制作响应式UI
 

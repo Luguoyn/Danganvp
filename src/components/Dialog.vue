@@ -1,19 +1,29 @@
 <template>
 
+  <transition name="bottom-in" appear>
+    <DialogBar :context="context"/>
+  </transition>
 
-  <DialogBar :context="context"/>
+  <transition name="left-in" appear>
+    <DialogName :name="localizedName" :time="time"/>
+  </transition>
 
-  <DialogName :name="localizedName" :time="time"/>
+  <transition name="top-in" appear>
+  <DialogBgm :background-music="bgm" :name="name" :time="time"/>
+  </transition>
 
-  <DialogBgm :background-music="bgm" :sound-effect="se" :character-voice="cv" :name="name" :time="time"/>
+  <transition name="right-in" appear>
+    <DialogIcon :time="time"/>
+  </transition>
 
-  <DialogIcon :time="time"/>
+  <audio v-if="se" :src="require(`../assets/audio/se/${se}.wav`)" autoplay hidden></audio>
 
+  <audio v-if="cv" :src="require(`../assets/audio/cv/${name}/${cv}.ogg`)" autoplay hidden></audio>
 
 </template>
 
 <script>
-import {computed, reactive, ref, toRefs} from 'vue'
+import {computed, reactive, toRefs} from 'vue'
 import characters from "@/assets/dr-script/characters";
 import DialogIcon from "@/components/DialogIcon";
 import DialogBgm from "@/components/DialogBgm";
@@ -34,15 +44,12 @@ export default {
       time: props.time,
     });
 
-    const nameBar = ref(null);
-
     const localizedName = computed(() => {
       return characters[props.name];
     });
 
     return {
       ...toRefs(dialog), localizedName,
-      nameBar,
     };
   },
   components: {
@@ -56,20 +63,58 @@ export default {
 
 <style scoped>
 
-.namebar-enter-active {
-  animation: test 1s;
+.left-in-enter-from, .left-in-leave-to {
+  left:-50vw;
 }
 
-.namebar-leave-active {
-  animation: test 1s reverse;
+.left-in-leave-from, .left-in-enter-to {
+  left: 0;
 }
 
-@keyframes test {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+.left-in-enter-active, .left-in-leave-active {
+  transition: all 0.5s ease;
 }
+
+
+
+.bottom-in-enter-from, .bottom-in-leave-to {
+  bottom:-50vh;
+}
+
+.bottom-in-leave-from, .bottom-in-enter-to {
+  bottom: 0;
+}
+
+.bottom-in-enter-active, .bottom-in-leave-active {
+  transition: all 0.5s ease;
+}
+
+
+.top-in-enter-from, .top-in-leave-to {
+  top:-50vh;
+}
+
+.top-in-leave-from, .top-in-enter-to {
+  top: 0;
+}
+
+.top-in-enter-active, .top-in-leave-active {
+  transition: all 0.5s ease;
+}
+
+
+
+.right-in-enter-from, .right-in-leave-to {
+  right:-50vw;
+}
+
+.right-in-leave-from, .right-in-enter-to {
+  right: 0;
+}
+
+.right-in-enter-active, .right-in-leave-active {
+  transition: all 0.5s ease;
+}
+
+
 </style>

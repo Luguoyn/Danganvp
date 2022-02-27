@@ -13,7 +13,7 @@ export default [
             {expression: 'thinking', context: '我想一想'},
             {expression: 'pose', context: '我再摆个POSE'},
             {expression: 'thinking', context: '然后我再把对话框变绿', time:'time unknown'},
-            {name: 'Nagito', expression: 'happy', context: '你们居然在相互摆POSE', se:'Happy', cv:'happy', spriteDirection:'right'},
+            {name: 'Nagito', expression: 'happy', context: '你们居然在相互摆POSE', se:'Happy', cv:'haha', spriteDirection:'right'},
             {expression: 'happy', context: '这真是斯巴拉西啊',se:'Happy', cv:'sibalaxi'},
             {expression: 'default', context: '我是狛枝凪斗'},
             {expression: 'thinking', context: '看着你们都在摆pose', cv:'thinking'},

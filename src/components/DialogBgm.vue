@@ -32,10 +32,6 @@
 
   </div>
 
-  <audio v-if="soundEffect" :src="require(`../assets/audio/se/${soundEffect}.wav`)" autoplay hidden></audio>
-
-  <audio v-if="characterVoice" :src="require(`../assets/audio/cv/${name}/${characterVoice}.ogg`)" autoplay hidden></audio>
-
 </template>
 <script>
 import AvBars from "vue-audio-visual/src/components/AvBars"
@@ -47,9 +43,6 @@ export default {
   components: {AvBars},
   props: {
     backgroundMusic: {},
-    soundEffect:{},
-    characterVoice:{},
-    name:{},
     time:{},
   },
   setup() {
