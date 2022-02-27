@@ -3,7 +3,7 @@
 
     <img class="dr-style-bar dr-style-bar-chapter" :src="require(`../assets/img/ui/public/chapter-bar.png`)" alt=""
          draggable="false">
-    <span class="dr-style-bar dr-style-bar-chapter dr-style-bar-context">Chapter 01</span>
+    <span class="dr-style-bar dr-style-bar-chapter dr-style-bar-context">CHAPTER 01</span>
 
     <img class="dr-style-bar" :src="require(`../assets/img/ui/${time}/style-bar.png`)" alt="" draggable="false">
     <span class="dr-style-bar dr-style-bar-context">{{ time.toUpperCase() }}</span>
@@ -18,7 +18,7 @@
     <img class="dr-style-area dr-style-area-rotate" :src="require(`../assets/img/ui/${time}/icon-area-rotate.png`)"
          alt=""
          draggable="false">
-    <div class="dr-style-area" v-for="index of [0,1,2]" :key="index">
+    <div v-for="index of [0,1,2]" :key="index">
       <img class="dr-style-area" v-show="iconController===index"
            :src="require(`../assets/img/ui/${time}/icon${index+1}.png`)" alt="" draggable="false">
     </div>
@@ -61,7 +61,7 @@ export default {
 }
 
 .dr-style-area {
-  position: fixed;
+  position: absolute;
   top: -4vh;
   right: -4vh;
   width: 23vh;
@@ -73,7 +73,7 @@ export default {
 }
 
 .dr-style-bar {
-  position: fixed;
+  position: absolute;
   top: 7vh;
   right: 6vh;
   height: 3vh;
@@ -89,6 +89,7 @@ export default {
   color: #262626;
   font-family: "Microsoft YaHei UI", sans-serif;
   font-weight: bolder;
+  white-space: nowrap;
 }
 
 .dr-style-bar-level {
