@@ -75,7 +75,7 @@ export default {
 .dr-style-bar {
   position: absolute;
   top: 7vh;
-  right: 6vh;
+  right: 15vh;
   height: 3vh;
 }
 
@@ -84,7 +84,7 @@ export default {
 }
 
 .dr-style-bar-context {
-  right: 20vh;
+  right: 22vh;
   font-size: 2vh;
   color: #262626;
   font-family: "Microsoft YaHei UI", sans-serif;
