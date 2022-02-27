@@ -1,7 +1,7 @@
 <template>
   <div @click="goNext">
     <Background :background="background"></Background>
-    <Sprite :name="name" :expression="expression"></Sprite>
+    <Sprite :name="name" :expression="expression" :sprite-direction="spriteDirection"></Sprite>
     <Dialog :name="name" :context="context" :bgm="bgm" :se="se" :cv="cv" :time="time"></Dialog>
   </div>
 </template>
@@ -38,6 +38,7 @@ export default {
       se: s.se,
       cv: s.cv,
       time: s.time,
+      spriteDirection: s.spriteDirection,
     })
 
     let flag = true;
@@ -65,6 +66,7 @@ export default {
         gameState.se = s.se || null;
         gameState.cv = s.cv || null;
         gameState.time = s.time || gameState.time || 'daytime';
+        gameState.spriteDirection = s.spriteDirection || 'left';
 
         if (s.context) {
           index = 0;

@@ -2,8 +2,8 @@
   <div class="dr-sprite">
 
     <transition appear
-                enter-active-class="animate__fadeInLeft animate__bounceIn"
-                leave-active-class="animate__fadeOutRight animate__bounceOut"
+                :enter-active-class="enterClass"
+                :leave-active-class="leaveClass"
                 v-for="(character, index) in characterList"
                 :key="index">
       <div v-if="character===name" class="dr-sprite-div">
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import {reactive, toRefs, markRaw} from "vue";
+import {reactive, toRefs, markRaw, computed} from "vue";
 import characters from "@/assets/dr-script/characters";
 import 'animate.css';
 
@@ -24,11 +24,17 @@ export default {
 
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Sprite",
-  props: ['name', 'expression'],
+  props: ['name', 'expression', 'spriteDirection'],
   setup(props) {
     const character = reactive({
       name: props.name,
       expression: props.expression,
+      enterClass: computed(()=>{
+        return props.spriteDirection === 'left'? 'animate__fadeInLeft animate__bounceIn':'animate__fadeInRight animate__bounceIn'
+      }),
+      leaveClass: computed(()=>{
+        return props.spriteDirection === 'left'? 'animate__fadeOutRight animate__bounceOut':'animate__fadeOutLeft animate__bounceOut'
+      }),
     })
 
     const characterList = markRaw(Object.keys(characters));
