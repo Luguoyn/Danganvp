@@ -30,6 +30,9 @@
 
 
   </div>
+
+  <audio v-if="soundEffect" :src="require(`../assets/audio/se/${soundEffect}.wav`)" autoplay hidden></audio>
+
 </template>
 <script>
 import AvBars from "vue-audio-visual/src/components/AvBars"
@@ -40,7 +43,9 @@ export default {
   name: 'DialogBgm',
   components: {AvBars},
   props: {
-    backgroundMusic: {}
+    backgroundMusic: {},
+    soundEffect:{},
+    characterVoice:{},
   },
   setup() {
     const win = useWindows();

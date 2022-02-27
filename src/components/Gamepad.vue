@@ -2,7 +2,7 @@
   <div @click="goNext">
     <Background :background="background"></Background>
     <Sprite :name="name" :expression="expression"></Sprite>
-    <Dialog :name="name" :context="context" :bgm="bgm"></Dialog>
+    <Dialog :name="name" :context="context" :bgm="bgm" :se="se"></Dialog>
   </div>
 </template>
 
@@ -35,6 +35,7 @@ export default {
       background: s.background,
       style: s.style,
       bgm: s.bgm,
+      se: s.se,
     })
 
     let flag = true;
@@ -59,6 +60,7 @@ export default {
         gameState.expression = s.expression || gameState.expression;
         gameState.background = s.background || gameState.background;
         gameState.bgm = s.bgm || gameState.bgm;
+        gameState.se = s.se || null;
 
         if (s.context) {
           index = 0;

@@ -5,7 +5,7 @@
 
   <DialogName :name="localizedName"/>
 
-  <DialogBgm :background-music="bgm"/>
+  <DialogBgm :background-music="bgm" :sound-effect="se" />
 
   <DialogIcon/>
 
@@ -22,12 +22,13 @@ import DialogName from "@/components/DialogName";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Dialog",
-  props: ['name', 'context', 'bgm'],
+  props: ['name', 'context', 'bgm', 'se'],
   setup(props) {
     const dialog = reactive({
       name: props.name,
       context: props.context,
       bgm: props.bgm,
+      se: props.se,
     });
 
     const nameBar = ref(null);
