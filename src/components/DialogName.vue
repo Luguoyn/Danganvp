@@ -40,13 +40,13 @@ export default {
 
 
 .dr-name {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
 }
 
 .dr-name-bar {
-  position: fixed;
+  position: absolute;
   left: 0;
   bottom: 0;
   height: 100vh;
@@ -54,22 +54,26 @@ export default {
 }
 
 .dr-name-bubble {
-  position: fixed;
+  position: absolute;
   bottom: 16vh;
   left: 4.4vh;
 }
 
 .dr-name-bubble-img {
-  position: fixed;
+  position: absolute;
   width: 10vh;
   height: auto;
 }
 
 .dr-name-context {
-  position: fixed;
+  position: absolute;
   bottom: 18vh;
-  left: 3vw;
+  left: 2.5vw;
   text-align: center;
+
+  /*不让他换行*/
+  white-space: nowrap;
+
 
   font-weight: bold;
 

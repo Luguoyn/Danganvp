@@ -45,7 +45,7 @@ export default {
 </script>
 <style scoped>
 .dr-dialog {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
 }

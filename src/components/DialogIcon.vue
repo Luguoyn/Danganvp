@@ -55,7 +55,7 @@ export default {
 
 
 .dr-style {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
 }
@@ -89,6 +89,8 @@ export default {
   color: #262626;
   font-family: "Microsoft YaHei UI", sans-serif;
   font-weight: bolder;
+
+  /*不让他换行*/
   white-space: nowrap;
 }
 

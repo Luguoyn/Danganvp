@@ -68,13 +68,13 @@ export default {
 
 
 .dr-bgm {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
 }
 
 .dr-bgm-bar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: auto;
@@ -82,7 +82,7 @@ export default {
 }
 
 .dr-bgm-guitar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: auto;
@@ -112,7 +112,7 @@ export default {
 }
 
 .dr-bgm-name {
-  position: fixed;
+  position: absolute;
   /*left: v-bind(bgmL);*/
   left: 5vh;
   top: 1.5vh;
