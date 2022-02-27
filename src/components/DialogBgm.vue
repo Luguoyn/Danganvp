@@ -5,18 +5,21 @@
          draggable="false">
 
 
-    <audio ref="bgm" :src="require(`../assets/audio/bgm/${backgroundMusic}.mp3`)" autoplay hidden loop></audio>
-    <div class="dr-bgm-bars">
-      <av-bars
-          class=" dr-bgm-bars-scale-control"
-          ref-link="bgm"
-          :canv-width="100"
-          :bar-width="10"
-          :bar-space="7"
-          :bar-color="`#343434`"
-          :fft-size="2**9"
-      ></av-bars>
-    </div>
+    <template v-if="backgroundMusic">
+      <audio ref="bgm" :src="require(`../assets/audio/bgm/${backgroundMusic}.mp3`)" autoplay hidden loop></audio>
+      <div class="dr-bgm-bars">
+        <av-bars
+            class=" dr-bgm-bars-scale-control"
+            ref-link="bgm"
+            :canv-width="100"
+            :bar-width="10"
+            :bar-space="7"
+            :bar-color="`#343434`"
+            :fft-size="2**9"
+        ></av-bars>
+      </div>
+    </template>
+
 
     <div class="dr-bgm-name">
       <marquee class="dr-bgm-name-loop" behavior="scroll" direction="left">{{ backgroundMusic }}</marquee>
