@@ -73,6 +73,7 @@ export default {
   position: fixed;
   width: 5.8vw;
   height: 5.8vw;
+  border-radius: 0.1vw;
   transform: rotate(-10deg);
 }
 
@@ -91,7 +92,7 @@ export default {
 }
 
 .dr-dialog-cube-3 {
-  bottom: 4.8vw;
+  bottom: 4.7vw;
   left: 32.7vw;
   background-color: cornflowerblue;
   opacity: v-bind(cubeOpacity03);
@@ -99,7 +100,7 @@ export default {
 
 .dr-dialog-cube-4 {
   bottom: 2.7vw;
-  left: 21.5vw;
+  left: 21.4vw;
   background-color: darksalmon;
   opacity: v-bind(cubeOpacity04);
 }
