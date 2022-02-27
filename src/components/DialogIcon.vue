@@ -35,9 +35,15 @@ export default {
 
     const iconController = computed(() => {
       return Math.floor(timer.value / 80) % 3;
+    });
+
+    const rotateController = computed(() => {
+      let time = Math.floor(timer.value / 8);
+      // time = timer.value;
+      return time - Math.sin(time / 8) * 20 + 'deg';
     })
     return{
-      iconController,
+      iconController, rotateController
     }
   }
 }
