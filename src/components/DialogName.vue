@@ -21,6 +21,7 @@ export default {
   },
   setup(){
     const timer = inject('timer');
+
     const bubbleController = computed(() => {
       return Math.floor(timer.value / 100) % 4;
     });
@@ -66,6 +67,8 @@ export default {
   bottom: 18vh;
   left: 3vw;
   text-align: center;
+
+  font-weight: bold;
 
   transform-origin: left;
   /*transform-origin: 0% 100%;*/

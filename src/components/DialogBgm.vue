@@ -120,6 +120,8 @@ export default {
 .dr-bgm-name-loop {
   font-size: 3vh;
   color: brown;
+  font-family: "Microsoft YaHei UI", sans-serif;
+  font-weight: bold;
 }
 
 
