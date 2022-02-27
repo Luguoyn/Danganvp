@@ -2,7 +2,7 @@
   <div @click="goNext">
     <Background :background="background"></Background>
     <Sprite :name="name" :expression="expression"></Sprite>
-    <Dialog :name="name" :context="context" :bgm="bgm" :se="se" :cv="cv"></Dialog>
+    <Dialog :name="name" :context="context" :bgm="bgm" :se="se" :cv="cv" :time="time"></Dialog>
   </div>
 </template>
 
@@ -37,6 +37,7 @@ export default {
       bgm: s.bgm,
       se: s.se,
       cv: s.cv,
+      time: s.time,
     })
 
     let flag = true;
@@ -48,7 +49,7 @@ export default {
       let length = drScript[modelP.value].script.length;
       if (scriptP.value >= length) scriptP.value = 0;
       if (flag) {
-        gameState.style = s.style || gameState.style;
+        gameState.style = s.style || gameState.style || 'dialog';
         while (gameState.style !== 'dialog') {
           scriptP.value++;
           if (scriptP.value >= length) scriptP.value = 0;
@@ -63,6 +64,7 @@ export default {
         gameState.bgm = s.bgm || gameState.bgm;
         gameState.se = s.se || null;
         gameState.cv = s.cv || null;
+        gameState.time = s.time || gameState.time || 'daytime';
 
         if (s.context) {
           index = 0;

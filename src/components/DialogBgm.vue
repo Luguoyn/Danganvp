@@ -1,7 +1,7 @@
 <template>
   <div class="dr-bgm">
 
-    <img class="dr-bgm-bar" :src="require(`../assets/img/ui/daytime/audio-bar.png`)" alt=""
+    <img class="dr-bgm-bar" :src="require(`../assets/img/ui/${time}/audio-bar.png`)" alt=""
          draggable="false">
 
 
@@ -25,7 +25,7 @@
       <marquee class="dr-bgm-name-loop" behavior="scroll" direction="left">{{ backgroundMusic }}</marquee>
     </div>
 
-    <img class="dr-bgm-guitar" :src="require(`../assets/img/ui/daytime/guitar01.png`)" alt=""
+    <img class="dr-bgm-guitar" :src="require(`../assets/img/ui/${time}/guitar01.png`)" alt=""
          draggable="false">
 
 
@@ -49,6 +49,7 @@ export default {
     soundEffect:{},
     characterVoice:{},
     name:{},
+    time:{},
   },
   setup() {
     const win = useWindows();

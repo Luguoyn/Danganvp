@@ -5,22 +5,22 @@
          draggable="false">
     <span class="dr-style-bar dr-style-bar-chapter dr-style-bar-context">Chapter 01</span>
 
-    <img class="dr-style-bar" :src="require(`../assets/img/ui/daytime/style-bar.png`)" alt="" draggable="false">
-    <span class="dr-style-bar dr-style-bar-context">DAYTIME</span>
+    <img class="dr-style-bar" :src="require(`../assets/img/ui/${time}/style-bar.png`)" alt="" draggable="false">
+    <span class="dr-style-bar dr-style-bar-context">{{ time.toUpperCase() }}</span>
 
     <img class="dr-style-bar dr-style-bar-level" :src="require(`../assets/img/ui/public/level-bar.png`)" alt=""
          draggable="false">
     <span class="dr-style-bar dr-style-bar-level dr-style-bar-context" style="color: #e0d8d8">LEVEL 07</span>
 
 
-    <img class="dr-style-area" :src="require(`../assets/img/ui/daytime/icon-area.png`)" alt=""
+    <img class="dr-style-area" :src="require(`../assets/img/ui/${time}/icon-area.png`)" alt=""
          draggable="false">
-    <img class="dr-style-area dr-style-area-rotate" :src="require(`../assets/img/ui/daytime/icon-area-rotate.png`)"
+    <img class="dr-style-area dr-style-area-rotate" :src="require(`../assets/img/ui/${time}/icon-area-rotate.png`)"
          alt=""
          draggable="false">
     <div class="dr-style-area" v-for="index of [0,1,2]" :key="index">
       <img class="dr-style-area" v-show="iconController===index"
-           :src="require(`../assets/img/ui/daytime/icon${index+1}.png`)" alt="" draggable="false">
+           :src="require(`../assets/img/ui/${time}/icon${index+1}.png`)" alt="" draggable="false">
     </div>
 
   </div>
@@ -30,8 +30,11 @@ import {inject, computed} from "vue";
 
 export default {
   name: 'DialogIcon',
-  setup(){
-     const timer = inject('timer');
+  props: {
+    time: {},
+  },
+  setup() {
+    const timer = inject('timer');
 
     const iconController = computed(() => {
       return Math.floor(timer.value / 80) % 3;
@@ -42,7 +45,7 @@ export default {
       // time = timer.value;
       return time - Math.sin(time / 8) * 20 + 'deg';
     })
-    return{
+    return {
       iconController, rotateController
     }
   }
@@ -81,7 +84,7 @@ export default {
 }
 
 .dr-style-bar-context {
-  right: 21vh;
+  right: 20vh;
   font-size: 2vh;
   color: #262626;
   font-family: "Microsoft YaHei UI", sans-serif;

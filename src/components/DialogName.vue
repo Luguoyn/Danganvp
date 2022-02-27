@@ -1,6 +1,7 @@
 <template>
+
   <div class="dr-name">
-    <img class="dr-name-bar" ref="nameBar" :src="require(`../assets/img/ui/daytime/namebar-main-character.png`)" alt=""
+    <img class="dr-name-bar" ref="nameBar" :src="require(`../assets/img/ui/${time}/namebar-default.png`)" alt=""
          draggable="false">
     <div class="dr-name-bubble" v-for="index of [0,1,2,3]" :key="index">
       <img class="dr-name-bubble-img" v-show="bubbleController===index"
@@ -17,9 +18,10 @@ import {inject, computed} from "vue";
 export default {
   name: 'DialogName',
   props: {
-    name: {}
+    name: {},
+    time: {},
   },
-  setup(){
+  setup() {
     const timer = inject('timer');
 
     const bubbleController = computed(() => {
@@ -27,7 +29,7 @@ export default {
     });
 
 
-    return{
+    return {
       bubbleController,
     }
   }
