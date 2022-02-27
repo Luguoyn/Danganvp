@@ -1,4 +1,5 @@
 <template>
+
   <div class="dr-bgm">
 
     <img class="dr-bgm-bar" :src="require(`../assets/img/ui/${time}/audio-bar.png`)" alt=""

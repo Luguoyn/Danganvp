@@ -11,6 +11,7 @@
       <span class="dr-dialog-name-text">{{ name }}</span>
     </div>
   </div>
+
 </template>
 <script>
 import {inject, computed} from "vue";

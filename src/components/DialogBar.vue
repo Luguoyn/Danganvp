@@ -51,26 +51,28 @@ export default {
 }
 
 .dr-dialog-bar {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   width: 100vw;
   height: auto;
 }
 
 .dr-dialog-context {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 18vh;
   width: 80vw;
   height: 12.5vw;
   color: aliceblue;
 
-  font-size: min(7vh, 4vw);
-  line-height: min(9vh, 5.14vw)
+  /*font-size: min(7vh, 4vw);*/
+  /*line-height: min(9vh, 5.14vw)*/
+  font-size: 4vw;
+  line-height: 5.14vw;
 }
 
 .dr-dialog-cube {
-  position: fixed;
+  position: absolute;
   width: 5.8vw;
   height: 5.8vw;
   border-radius: 0.1vw;

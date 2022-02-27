@@ -9,6 +9,7 @@
 
   <DialogIcon :time="time"/>
 
+
 </template>
 
 <script>
@@ -53,3 +54,22 @@ export default {
 }
 </script>
 
+<style scoped>
+
+.namebar-enter-active {
+  animation: test 1s;
+}
+
+.namebar-leave-active {
+  animation: test 1s reverse;
+}
+
+@keyframes test {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+</style>
