@@ -69,6 +69,5 @@ export default {
 .dr-sprite-img {
   width: auto;
   height: 100vh;
-
 }
 </style>

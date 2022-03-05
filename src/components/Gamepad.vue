@@ -13,6 +13,7 @@ import Background from "@/components/Background";
 import script from "@/assets/dr-script/script";
 
 import {ref, markRaw, reactive, onMounted, onUnmounted, toRefs, watch, provide} from "vue";
+import useTimer from "@/hooks/useTimer";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -103,16 +104,7 @@ export default {
     })
 
 
-    const timer = ref(0);
-    let timerId;
-    onMounted(() => {
-      timerId = setInterval(() => {
-        timer.value++;
-      }, 1);
-    })
-    onUnmounted(() => {
-      window.clearInterval(timerId);
-    })
+    const timer = useTimer();
     provide('timer', timer);
 
 
